@@ -2,7 +2,7 @@ import Button from "components/Button";
 import Card from "components/Card";
 import Table from "components/Table";
 import Header from "./Header";
-import MovementsList from "./MovementsList";
+import MovementsList from "./List";
 import Quantity from "./Quantity";
 
 import "./styles.scss";

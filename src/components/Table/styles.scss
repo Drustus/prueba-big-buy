@@ -1,4 +1,10 @@
 .table {
+  &__header {
+    th {
+      text-transform: uppercase;
+    }
+  }
+
   td {
     div {
       height: 100%;

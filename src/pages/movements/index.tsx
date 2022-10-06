@@ -1,18 +1,24 @@
+import Button from "components/Button";
 import Card from "components/Card";
 import Table from "components/Table";
-import Button from "react-bootstrap/Button";
 import Header from "./Header";
 import MovementsList from "./MovementsList";
+import Quantity from "./Quantity";
+
+import "./styles.scss";
+import Title from "./Title";
 
 const Movements = () => {
   return (
     <Card>
-      <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-        <div>Movimientos</div>
-        <div>Saldo actual</div>
-        <Button variant="primary">Retirar fondos</Button>
-        <Button variant="secondary">Ingresar fondos</Button>
-      </div>
+      <Card.Title>
+        <Title />
+        <div className="right-button">
+          <Quantity />
+          <Button>Ingresar fondos</Button>
+          <Button secondary>Retirar fondos</Button>
+        </div>
+      </Card.Title>
       <Table>
         <Header />
         <MovementsList />

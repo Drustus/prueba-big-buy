@@ -1,7 +1,5 @@
 import Button from "components/Button";
 import Card from "components/Card";
-import Table from "components/Table";
-import Header from "./List/Header";
 import MovementsList from "./List";
 import Quantity from "./Quantity";
 import Title from "./Title";
@@ -53,10 +51,7 @@ const Movements = () => {
             </Button>
           </div>
         </Card.Title>
-        <Table>
-          <Header />
-          <MovementsList />
-        </Table>
+        <MovementsList />
       </Card>
       {withModal(
         <NewMovementForm

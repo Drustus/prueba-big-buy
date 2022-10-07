@@ -1,13 +1,10 @@
+import BButton from "react-bootstrap/Button";
 import Props from "./types";
-import "./styles.scss";
 
 const Button = ({ secondary, children }: Props) => {
-  const className = secondary ? "secondary-button" : "primary-button";
-  return (
-    <button className={`${className} btn`}>
-      <div className={`${className}-text`}>{children}</div>
-    </button>
-  );
+  const variant = secondary ? "warning" : undefined;
+
+  return <BButton variant={variant}>{children}</BButton>;
 };
 
 export default Button;

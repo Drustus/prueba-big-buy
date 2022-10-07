@@ -67,6 +67,9 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
             onChange={onChange}
             value={value}
             isInvalid={!!error}
+            placeholder={
+              type === 1 ? `Hasta ${numberWithPoint(balance)} €` : undefined
+            }
           />
           <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
           {getResultAfterOperation()}

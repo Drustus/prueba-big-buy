@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "components/Modal";
 
-const useModal: useModalProps = (title, onSave) => {
+const useModal: useModalProps = onSave => {
   const [show, setShow] = useState<boolean>();
 
   const openModal = () => {
@@ -12,7 +12,7 @@ const useModal: useModalProps = (title, onSave) => {
     setShow(false);
   };
 
-  const withModal: (Body: React.ReactNode) => React.ReactNode = Body => {
+  const withModal: withModalProps = (Body, title) => {
     return (
       <Modal show={show} onClose={closeModal} onSave={onSave} title={title}>
         {Body}

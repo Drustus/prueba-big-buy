@@ -21,9 +21,21 @@ type Movement = {
   amount: number;
 };
 
+type NewMovement = {
+  concept: MovementType;
+  amount: number;
+};
+
 enum MovementType {
   Add = 0,
   Extract = 1
 }
 
-export { Wallet, Movement, MovementType, MovementWithStatus, RawWaller };
+export {
+  Wallet,
+  Movement,
+  MovementType,
+  MovementWithStatus,
+  RawWaller,
+  NewMovement
+};

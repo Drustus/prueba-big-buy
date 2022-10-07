@@ -1,4 +1,7 @@
-import { RawWaller, Wallet } from "global";
+import { Movement, RawWaller, Wallet } from "global";
+
+const orderByDate: (a: Movement, b: Movement) => number = (a, b) =>
+  new Date(b.date).getTime() - new Date(a.date).getTime();
 
 const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
   const parsedWallet: Wallet = {
@@ -10,9 +13,7 @@ const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
     return parsedWallet.movements[0]?.nextBalance || parsedWallet.balance;
   };
 
-  const orderedMovements = wallet.movements.sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  const orderedMovements = wallet.movements.sort(orderByDate);
 
   for (let index = orderedMovements.length - 1; index >= 0; index--) {
     const movement = orderedMovements[index];

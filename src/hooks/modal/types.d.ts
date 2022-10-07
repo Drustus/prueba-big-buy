@@ -1,4 +1,4 @@
-type useModalProps = (title: string, onSave: () => void) => useModalResultProps;
+type useModalProps = (onSave: () => void) => useModalResultProps;
 
 type useModalResultProps = {
   openModal: () => void;
@@ -6,4 +6,4 @@ type useModalResultProps = {
   withModal: withModalProps;
 };
 
-type withModalProps = (Body: React.ReactNode) => React.ReactNode;
+type withModalProps = (Body: React.ReactNode, title: string) => React.ReactNode;

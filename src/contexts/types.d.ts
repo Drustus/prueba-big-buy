@@ -1,8 +1,8 @@
-import { Movement, MovementWithStatus } from "global";
+import { NewMovement, MovementWithStatus } from "global";
 
 export type WalletContextProps = {
   movements: MovementWithStatus[];
-  onAddMovement: (movement: Movement) => void;
+  onAddMovement: (movement: NewMovement) => void;
   balance: number;
 };
 

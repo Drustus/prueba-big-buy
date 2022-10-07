@@ -5,9 +5,9 @@ import Props from "./types";
 
 const Card = ({ children }: Props) => {
   return (
-    <BCard className="card">
+    <div className="card default-card">
       <BCard.Body>{children}</BCard.Body>
-    </BCard>
+    </div>
   );
 };
 

@@ -1,13 +1,19 @@
-.card {
+.default-card {
+  width: 100%;
+  max-width: 1125px;
+  min-width: 640px !important;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  padding: 25px 30px;
-  gap: 25px;
+  padding: 20px 0px;
+  gap: 20px;
   background: #ffffff;
-  box-shadow: 10px 10px 30px rgba(181, 181, 195, 0.4);
+  box-shadow: 5px 5px 30px rgba(181, 181, 195, 0.4);
   border-radius: 4px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  overflow: auto;
+}
+
+.card-body {
+  width: 100%;
 }

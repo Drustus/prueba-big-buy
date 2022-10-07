@@ -1,11 +1,13 @@
-import React from "react";
+import WalletProvider from "contexts/WalletContext";
 import "./App.scss";
 import Movements from "./movements";
 
 function App() {
   return (
     <div className="app">
-      <Movements />
+      <WalletProvider>
+        <Movements />
+      </WalletProvider>
     </div>
   );
 }

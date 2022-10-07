@@ -1,40 +1,37 @@
+import useWallet from "hooks/useWallet";
+import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
 
 const MovementsList = () => {
+  const { movements } = useWallet();
   return (
     <tbody>
-      <tr>
-        <Cell>1234567</Cell>
-        <Cell>13/08/21 15:51</Cell>
-        <Cell>Retirada</Cell>
-        <Cell>14,73€</Cell>
-        <Cell>91,85€</Cell>
-        <Cell>24,56€</Cell>
-      </tr>
-      <tr>
-        <Cell>1234567</Cell>
-        <Cell>13/08/21 15:51</Cell>
-        <Cell>Retirada</Cell>
-        <Cell>14,73€</Cell>
-        <Cell>91,85€</Cell>
-        <Cell>24,56€</Cell>
-      </tr>
-      <tr>
-        <Cell>1234567</Cell>
-        <Cell>13/08/21 15:51</Cell>
-        <Cell>Retirada</Cell>
-        <Cell>14,73€</Cell>
-        <Cell>91,85€</Cell>
-        <Cell>24,56€</Cell>
-      </tr>
-      <tr>
-        <Cell>1234567</Cell>
-        <Cell>13/08/21 15:51</Cell>
-        <Cell>Retirada</Cell>
-        <Cell>14,73€</Cell>
-        <Cell>91,85€</Cell>
-        <Cell>24,56€</Cell>
-      </tr>
+      {movements.map(movement => (
+        <tr key={movement.id}>
+          <Cell>{movement.id}</Cell>
+          <Cell>
+            <div className="cell-date">
+              <div>
+                {movement.date.toLocaleDateString("es-es", {
+                  month: "2-digit",
+                  day: "2-digit",
+                  year: "2-digit"
+                })}
+              </div>
+              <div>
+                {movement.date.toLocaleTimeString("es-es", {
+                  hour: "2-digit",
+                  minute: "2-digit"
+                })}
+              </div>
+            </div>
+          </Cell>
+          <Cell>{movement.concept === 0 ? "Ingreso" : "Retirada"}</Cell>
+          <Cell>{`${numberWithPoint(movement.amount)} €`}</Cell>
+          <Cell>{`${numberWithPoint(movement.lastBalance)} €`}</Cell>
+          <Cell>{`${numberWithPoint(movement.nextBalance)} €`}</Cell>
+        </tr>
+      ))}
     </tbody>
   );
 };

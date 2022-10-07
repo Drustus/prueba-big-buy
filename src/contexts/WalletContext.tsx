@@ -1,24 +1,36 @@
-import { createContext, useState } from "react";
-import WalletContextProps from "./types";
+import { createContext, useEffect, useState } from "react";
+import { WalletContextProps, Props } from "./types";
 import data from "assets/data.json";
-import { Movement } from "global";
+import parseWallet from "utils/parseWallet";
+import { Movement, MovementWithStatus } from "global";
+
+const parsedWallet = parseWallet(data);
 
 const params: WalletContextProps = {
   movements: [],
-  onAdd: () => {}
+  balance: 0,
+  onAddMovement: () => {}
 };
 
-const WalletContext = createContext(params);
+export const WalletContext = createContext(params);
 
-const WalletProvider = ({ children }) => {
-  const [balance, setBalance] = useState<number>(data.balance);
-  const [movements, setMovements] = useState<Movement[]>(data.movements);
+const WalletProvider = ({ children }: Props) => {
+  const [balance, setBalance] = useState<number>(parsedWallet.balance);
+  const [movements, setMovements] = useState<MovementWithStatus[]>(
+    parsedWallet.movements
+  );
+
+  useEffect(() => {}, [movements]);
+
+  const onAddMovement = (movement: Movement) => {
+    // setMovements(currentMovements => [movement, ...currentMovements]);
+  };
 
   return (
-    <WalletContext.Provider value={{ movements }}>
+    <WalletContext.Provider value={{ movements, balance, onAddMovement }}>
       {children}
     </WalletContext.Provider>
   );
 };
 
-export default WallerProvider;
+export default WalletProvider;

@@ -1,5 +1,11 @@
-type WalletContextProps = {
-  movements: Movement[];
-  onAdd: (movement: NewMovement) => void;
+import { Movement, MovementWithStatus } from "global";
+
+export type WalletContextProps = {
+  movements: MovementWithStatus[];
+  onAddMovement: (movement: Movement) => void;
+  balance: number;
 };
-export default WalletContextProps;
+
+export type Props = {
+  children: React.ReactNode;
+};

@@ -1,5 +1,5 @@
 import { SecondaryText } from "components/Text";
-import useWallet from "hooks/useWallet";
+import useWallet from "hooks/wallet/useWallet";
 import numberWithPoint from "utils/numberWithPoint";
 import "./styles.scss";
 

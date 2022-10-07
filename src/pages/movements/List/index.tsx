@@ -1,4 +1,4 @@
-import useWallet from "hooks/useWallet";
+import useWallet from "hooks/wallet/useWallet";
 import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
 

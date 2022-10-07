@@ -7,12 +7,16 @@ const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
   };
 
   const getLastBalance: (index: number) => number = index => {
-    return (
-      parsedWallet.movements[index - 1]?.nextBalance || parsedWallet.balance
-    );
+    return parsedWallet.movements[0]?.nextBalance || parsedWallet.balance;
   };
 
-  wallet.movements.forEach((movement, index) => {
+  const orderedMovements = wallet.movements.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
+  for (let index = orderedMovements.length - 1; index >= 0; index--) {
+    const movement = orderedMovements[index];
+
     const lastBalance = getLastBalance(index);
     const amount = movement.amount / 100;
 
@@ -23,16 +27,16 @@ const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
       nextBalance = lastBalance - amount;
     }
 
-    parsedWallet.movements.push({
+    parsedWallet.movements.unshift({
       ...movement,
       date: new Date(movement.date),
       amount,
       lastBalance,
       nextBalance
     });
+  }
 
-    parsedWallet.balance = parsedWallet.movements[0].nextBalance;
-  });
+  parsedWallet.balance = parsedWallet.movements[0].nextBalance;
 
   return parsedWallet;
 };

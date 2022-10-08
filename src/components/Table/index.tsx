@@ -5,7 +5,11 @@ import "./styles.scss";
 import Props from "./types";
 
 const Table = ({ children }: Props) => {
-  return <BTable className="table">{children}</BTable>;
+  return (
+    <div className="content-table">
+      <BTable className="table">{children}</BTable>
+    </div>
+  );
 };
 
 export default Table;

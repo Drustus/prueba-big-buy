@@ -4,7 +4,7 @@ Esta prueba consiste en añadir movimientos y realizar la operación correspondi
 
 En el desarrollo he intentado aplicar patrones de React (HOC, render props, compound, etc) y algunos hooks predefinidos (useImperativeHandler, useRef) para mostrar dichas características aunque a veces quedara de manera forzada. La arquitectura del proyecto es simple y no he simulado un repositorio para obtener los datos, cargándolos directamente del JSON.
 
-Además de un test de cada tipo he añadido tests E2E con cypress.
+Además de un test de cada tipo de objeto (hook, componente, vista), he añadido un par de tests simples E2E con cypress.
 
 # Iniciar la prueba
 
@@ -14,7 +14,7 @@ Comandos usuales para trabajar:
 
 - `yarn` para instalar
 - `yarn start` para arrancar la aplicación
-- `yarn cypress open` para inicializar cypress. Seleccionar `E2E Testing` -> Running Chrome -> seleccionar wallet.cy.ts
+- `yarn cypress open` para inicializar cypress. Seleccionar `E2E Testing` -> `Running Chrome` -> seleccionar `wallet.cy.ts`
 
 # Dificultades
 

@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import {
   FilterContextProps,
+  OnFilterColumnsProps,
   OnFilterTextProps,
   Props,
   SelectedDate,
@@ -22,7 +23,10 @@ const params: FilterContextProps = {
   textFilter: undefined,
   onSelectedDateFilter: () => {},
   clearDateFilter: () => {},
-  onFilterText: () => {}
+  onFilterText: () => {},
+  filterColumns: [],
+  onColumnFilter: () => {},
+  clearColumnFilter: () => {}
 };
 
 export const FilterContext = createContext(params);
@@ -30,6 +34,7 @@ export const FilterContext = createContext(params);
 const FilterProvider = ({ children }: Props) => {
   const [dateFilters, setDateFilters] = useState<StateProps>(initialState);
   const [textFilter, setTextFilter] = useState<string>("");
+  const [filterColumns, setFilterColumns] = useState<Array<string>>([]);
 
   const onSelectedDateFilter: SelectedDate = dateFilter => {
     setDateFilters({
@@ -48,6 +53,15 @@ const FilterProvider = ({ children }: Props) => {
     setTextFilter(text);
   };
 
+  const onColumnFilter: OnFilterColumnsProps = columns => {
+    setFilterColumns(columns);
+  };
+
+  const clearColumnFilter = () => {
+    console.log("clear");
+    setFilterColumns([]);
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -58,7 +72,10 @@ const FilterProvider = ({ children }: Props) => {
         rawEnd: dateFilters.rawEnd,
         clearDateFilter,
         onFilterText,
-        textFilter
+        textFilter,
+        filterColumns,
+        onColumnFilter,
+        clearColumnFilter
       }}
     >
       {children}

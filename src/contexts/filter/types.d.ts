@@ -7,6 +7,9 @@ export type FilterContextProps = {
   clearDateFilter: () => void;
   onFilterText: OnFilterTextProps;
   textFilter: string | undefined;
+  filterColumns: Array<string>;
+  onColumnFilter: OnFilterColumnsProps;
+  clearColumnFilter: () => void;
 };
 
 export type SelectedDate = (dateFilter: NewDateFilter) => void;
@@ -24,6 +27,7 @@ export type NewDateFilter = {
 };
 
 export type OnFilterTextProps = (text: string) => void;
+export type OnFilterColumnsProps = (text: Array<string>) => void;
 
 export type Props = {
   children: React.ReactNode;

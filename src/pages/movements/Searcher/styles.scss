@@ -16,3 +16,11 @@
   color: #0090ff !important;
   border-color: #f3f6f9 !important;
 }
+
+.popover-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 25px;
+}

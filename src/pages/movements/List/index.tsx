@@ -10,7 +10,7 @@ import Header from "./Header";
 const MovementsList = () => {
   const { movements } = useContext(WalletContext);
   const { currentPage, take } = useContext(PaginationContext);
-  console.log(movements);
+
   const initialMovement = (currentPage - 1) * take;
   const pageMovements = movements.slice(
     initialMovement,

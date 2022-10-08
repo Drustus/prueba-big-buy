@@ -12,3 +12,9 @@
     }
   }
 }
+.header-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  cursor: pointer;
+}

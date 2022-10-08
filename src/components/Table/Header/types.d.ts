@@ -1,5 +1,5 @@
 type Props = {
-  headers: Array<string>;
+  children: React.ReactNode;
 };
 
 export default Props;

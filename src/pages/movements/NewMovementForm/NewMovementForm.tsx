@@ -2,7 +2,7 @@ import { WalletContext } from "contexts/wallet/WalletContext";
 import { forwardRef, useContext, useImperativeHandle, useState } from "react";
 import Form from "react-bootstrap/Form";
 import numberWithPoint from "utils/numberWithPoint";
-import Props, { OnSubmitHandlerType } from "./types";
+import Props, { OnChangeType, OnSubmitHandlerType } from "./types";
 import "./styles.scss";
 
 const PREFIX = "En tu cuenta quedarán:";

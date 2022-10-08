@@ -6,7 +6,7 @@ En el desarrollo he intentado aplicar patrones de React (HOC, render props, comp
 
 Además de un test de cada tipo he añadido tests E2E con cypress.
 
-# Arrancar la prueba
+# Iniciar la prueba
 
 Para arrancar el proyecto se necesita node y npm o yarn instalado, pero seguro que no hay problema ;)
 
@@ -22,12 +22,28 @@ Una de las mayores dificultades ha sido adaptar el diseño para un formato móvi
 
 También ha sido especialmente tedioso realizar el paginado, teniendo en cuenta el número de elementos por página, el desplazamiento de la ventana del propio paginado, etc.
 
-Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado por poner un filtro en esa columna que te permite poner fechas y filtrar por el rango. En cuanto al filtrado por tipo de operación la he incluido en el input buscador. Sobre este input, he optado por quitar el botón de Filtrar, ya que he hecho un filtro dinámico en el que se va filtrando mientras escribes. Esta decisión podría tener problemas si la carga de datos es muy alta y habría que utilizar algún patrón como useDefferedValue para evitar el bloqueo de interfaz. Con esta decisión tampoco se podría filtrar por varios campos.
+Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado por poner un filtro en esa columna que te permite poner fechas y filtrar por el rango. En cuanto al filtrado por tipo de operación la he incluido en el input buscador. Sobre este input, he optado por quitar el botón de Filtrar, ya que he hecho un filtro dinámico en el que se va filtrando mientras escribes. Esta decisión podría tener problemas si la carga de datos es muy alta y habría que utilizar algún patrón como `useDefferedValue` para evitar el bloqueo de interfaz. Con esta decisión tampoco se podría filtrar por varios campos.
 
-# Mejoras aportadas
+# Mejoras aportadas y futuras
 
-Como parte de mejora se ha cambiado el botón de filtrar para que sea una búsqueda dinámica, aportando rapidez al usuario y evitando clics. En el formulario para realizar una operación se ha añadido un texto que indica el resultado que va a tener la operación según la cantidad.
+## Mejoras realizadas
 
-También se bloquea el botón para extraer fondos si no quedan y se le muestra un aviso al usuario mediante un tooltip.
+- Cambiado el botón de filtrar para que sea una búsqueda dinámica, aportando rapidez al usuario y evitando clics.
+- Se subraya la coincidencia con la búsqueda.
+- Se bloquea el botón de extraer dinero y se informa al usuario si no queda dinero en la cuenta.
+- Se muestra el resultado de la operación antes de realizarla.
+- El botón de limpiar los filtros de columnas y fechas sólo se activa si hay filtros.
+- El filtro por rango de fechas está en la columna de la fecha.
 
-Quedarían multitud de mejoras que se podrían añadir: mejor validación de formulario, feedback al usuario cuando realice una operación, más tipos de filtrados en las columnas (filtrar importe con operadores, por ejemplo), mejorar el diseño, i18n de textos y monedas, lazyload de componentes, enrutado.
+## Mejoras por realizar
+
+- Mejorar la validación y diseño de los formularios.
+- Dar feedback al usuario cuando se realice una opeación con éxito.
+- Más filtros en las columnas (por ejemplo, filtrar importe con ciertos operadores).
+- Mejorar el diseño en general para móvil.
+- Alternativa al calendario mostrado.
+- i18n textos y monedas. Extraer los textos hardcoded.
+- lazy load de componentes
+- Mejoras de arquitectura:
+  - Mejorar el tipado de los objetos, aprovechar herencias.
+  - Ordenar los imports según patrón.

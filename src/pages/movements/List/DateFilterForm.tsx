@@ -8,9 +8,10 @@ import { FilterContext } from "contexts/filter/FilterContext";
 const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
   const [selectedIni, setSelectedIni] = useState<string>();
   const [selectedEnd, setSelectedEnd] = useState<string>();
+  const [error, showError] = useState<boolean>(false);
+
   const { onSelectedDateFilter, rawIni, rawEnd, clearDateFilter } =
     useContext(FilterContext);
-  const [error, showError] = useState<boolean>(false);
 
   const onSubmit = () => {
     if (!selectedIni || !selectedEnd) {

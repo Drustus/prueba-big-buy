@@ -3,6 +3,7 @@ import Table from "components/Table";
 import { FilterContext } from "contexts/filter/FilterContext";
 import { PaginationContext } from "contexts/pagination/PaginationContext";
 import { WalletContext } from "contexts/wallet/WalletContext";
+import useColumnFilter from "hooks/columnFilter/useColumnFilter";
 import { useContext } from "react";
 import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
@@ -12,6 +13,7 @@ const MovementsList = () => {
   const { movements } = useContext(WalletContext);
   const { currentPage, take } = useContext(PaginationContext);
   const { dateIni, dateEnd, textFilter } = useContext(FilterContext);
+  const columns = useColumnFilter();
 
   let filteredMovements = movements;
 
@@ -53,28 +55,38 @@ const MovementsList = () => {
         <tbody>
           {pageMovements.map(movement => (
             <tr key={movement.id}>
-              <Cell>{movement.id}</Cell>
-              <Cell>
-                <div className="cell-date">
-                  <div>
-                    {movement.date.toLocaleDateString("es-es", {
-                      month: "2-digit",
-                      day: "2-digit",
-                      year: "2-digit"
-                    })}
+              {columns.showId && <Cell>{movement.id}</Cell>}
+              {columns.showDate && (
+                <Cell>
+                  <div className="cell-date">
+                    <div>
+                      {movement.date.toLocaleDateString("es-es", {
+                        month: "2-digit",
+                        day: "2-digit",
+                        year: "2-digit"
+                      })}
+                    </div>
+                    <div>
+                      {movement.date.toLocaleTimeString("es-es", {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                      })}
+                    </div>
                   </div>
-                  <div>
-                    {movement.date.toLocaleTimeString("es-es", {
-                      hour: "2-digit",
-                      minute: "2-digit"
-                    })}
-                  </div>
-                </div>
-              </Cell>
-              <Cell>{movement.concept === 0 ? "Ingreso" : "Retirada"}</Cell>
-              <Cell>{`${numberWithPoint(movement.amount)} €`}</Cell>
-              <Cell>{`${numberWithPoint(movement.lastBalance)} €`}</Cell>
-              <Cell>{`${numberWithPoint(movement.nextBalance)} €`}</Cell>
+                </Cell>
+              )}
+              {columns.showConcept && (
+                <Cell>{movement.concept === 0 ? "Ingreso" : "Retirada"}</Cell>
+              )}
+              {columns.showAmount && (
+                <Cell>{`${numberWithPoint(movement.amount)} €`}</Cell>
+              )}
+              {columns.showLastBalance && (
+                <Cell>{`${numberWithPoint(movement.lastBalance)} €`}</Cell>
+              )}
+              {columns.showNextBalance && (
+                <Cell>{`${numberWithPoint(movement.nextBalance)} €`}</Cell>
+              )}
             </tr>
           ))}
         </tbody>

@@ -1,5 +1,11 @@
 import { createContext, useState } from "react";
-import { FilterContextProps, Props, SelectedDate, StateProps } from "./types";
+import {
+  FilterContextProps,
+  OnFilterTextProps,
+  Props,
+  SelectedDate,
+  StateProps
+} from "./types";
 
 const initialState = {
   rawIni: undefined,
@@ -13,14 +19,17 @@ const params: FilterContextProps = {
   dateEnd: undefined,
   rawIni: undefined,
   rawEnd: undefined,
+  textFilter: undefined,
   onSelectedDateFilter: () => {},
-  clearDateFilter: () => {}
+  clearDateFilter: () => {},
+  onFilterText: () => {}
 };
 
 export const FilterContext = createContext(params);
 
 const FilterProvider = ({ children }: Props) => {
   const [dateFilters, setDateFilters] = useState<StateProps>(initialState);
+  const [textFilter, setTextFilter] = useState<string>("");
 
   const onSelectedDateFilter: SelectedDate = dateFilter => {
     setDateFilters({
@@ -35,6 +44,10 @@ const FilterProvider = ({ children }: Props) => {
     setDateFilters(initialState);
   };
 
+  const onFilterText: OnFilterTextProps = text => {
+    setTextFilter(text);
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -43,7 +56,9 @@ const FilterProvider = ({ children }: Props) => {
         onSelectedDateFilter,
         rawIni: dateFilters.rawIni,
         rawEnd: dateFilters.rawEnd,
-        clearDateFilter
+        clearDateFilter,
+        onFilterText,
+        textFilter
       }}
     >
       {children}

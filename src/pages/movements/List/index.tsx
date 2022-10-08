@@ -11,14 +11,35 @@ import Header from "./Header";
 const MovementsList = () => {
   const { movements } = useContext(WalletContext);
   const { currentPage, take } = useContext(PaginationContext);
-  const { dateIni, dateEnd } = useContext(FilterContext);
+  const { dateIni, dateEnd, textFilter } = useContext(FilterContext);
 
-  const filteredMovements =
-    dateIni && dateEnd
-      ? movements.filter(movement => {
-          return movement.date >= dateIni && movement.date <= dateEnd;
-        })
-      : movements;
+  let filteredMovements = movements;
+
+  if (dateIni && dateEnd) {
+    filteredMovements = filteredMovements.filter(
+      movement => movement.date >= dateIni && movement.date <= dateEnd
+    );
+  }
+
+  if (textFilter) {
+    filteredMovements = filteredMovements.filter(movement => {
+      const concept = movement.concept === 0 ? "Ingreso" : "Retirada";
+      const amount = numberWithPoint(movement.amount);
+      const lastBalance = numberWithPoint(movement.lastBalance);
+      const nextBalance = numberWithPoint(movement.nextBalance);
+      const containsAmount = amount.includes(textFilter);
+      const containsLastBalance = lastBalance.includes(textFilter);
+      const containsNextBalance = nextBalance.includes(textFilter);
+
+      return (
+        concept.includes(textFilter) ||
+        containsAmount ||
+        containsLastBalance ||
+        containsNextBalance
+      );
+    });
+  }
+
   const initialMovement = (currentPage - 1) * take;
   const pageMovements = filteredMovements.slice(
     initialMovement,

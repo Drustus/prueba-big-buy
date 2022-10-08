@@ -5,6 +5,8 @@ export type FilterContextProps = {
   rawIni: string | undefined;
   rawEnd: string | undefined;
   clearDateFilter: () => void;
+  onFilterText: OnFilterTextProps;
+  textFilter: string | undefined;
 };
 
 export type SelectedDate = (dateFilter: NewDateFilter) => void;
@@ -20,6 +22,8 @@ export type NewDateFilter = {
   ini: string;
   end: string;
 };
+
+export type OnFilterTextProps = (text: string) => void;
 
 export type Props = {
   children: React.ReactNode;

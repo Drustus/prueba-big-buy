@@ -9,7 +9,7 @@ import { useContext, useRef, useState } from "react";
 import "./styles.scss";
 import { WalletContext } from "contexts/wallet/WalletContext";
 import PaginationProvider from "contexts/pagination/PaginationContext";
-import FilterProvider from "contexts/filter/FilterContext";
+import Searcher from "./Searcher";
 
 const Movements = () => {
   const { onAddMovement } = useContext(WalletContext);
@@ -53,10 +53,9 @@ const Movements = () => {
             </Button>
           </div>
         </Card.Title>
+        <Searcher />
         <PaginationProvider>
-          <FilterProvider>
-            <MovementsList />
-          </FilterProvider>
+          <MovementsList />
         </PaginationProvider>
       </Card>
       {withModal(

@@ -2,9 +2,17 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px;
+  padding-bottom: 25px;
   gap: 7px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
+}
+
+.searcher > form {
+  width: 100%;
+  flex: 0.5;
+}
+
+.columnas-button {
+  background: #f3f6f9 !important;
+  color: #0090ff !important;
+  border-color: #f3f6f9 !important;
 }

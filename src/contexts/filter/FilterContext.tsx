@@ -13,8 +13,7 @@ const params: FilterContextProps = {
   dateEnd: undefined,
   rawIni: undefined,
   rawEnd: undefined,
-  onSelectedDateIni: () => {},
-  onSelectedDateEnd: () => {},
+  onSelectedDateFilter: () => {},
   clearDateFilter: () => {}
 };
 
@@ -23,20 +22,13 @@ export const FilterContext = createContext(params);
 const FilterProvider = ({ children }: Props) => {
   const [dateFilters, setDateFilters] = useState<StateProps>(initialState);
 
-  const onSelectedDateIni: SelectedDate = date => {
-    setDateFilters(current => ({
-      ...current,
-      rawIni: date,
-      ini: new Date(date)
-    }));
-  };
-
-  const onSelectedDateEnd: SelectedDate = date => {
-    setDateFilters(current => ({
-      ...current,
-      rawEnd: date,
-      end: new Date(date)
-    }));
+  const onSelectedDateFilter: SelectedDate = dateFilter => {
+    setDateFilters({
+      rawIni: dateFilter.ini,
+      rawEnd: dateFilter.end,
+      ini: new Date(dateFilter.ini),
+      end: new Date(dateFilter.end)
+    });
   };
 
   const clearDateFilter = () => {
@@ -47,9 +39,8 @@ const FilterProvider = ({ children }: Props) => {
     <FilterContext.Provider
       value={{
         dateIni: dateFilters.ini,
-        onSelectedDateIni,
         dateEnd: dateFilters.end,
-        onSelectedDateEnd,
+        onSelectedDateFilter,
         rawIni: dateFilters.rawIni,
         rawEnd: dateFilters.rawEnd,
         clearDateFilter

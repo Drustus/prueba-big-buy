@@ -11,9 +11,16 @@ import Header from "./Header";
 const MovementsList = () => {
   const { movements } = useContext(WalletContext);
   const { currentPage, take } = useContext(PaginationContext);
+  const { dateIni, dateEnd } = useContext(FilterContext);
 
+  const filteredMovements =
+    dateIni && dateEnd
+      ? movements.filter(movement => {
+          return movement.date >= dateIni && movement.date <= dateEnd;
+        })
+      : movements;
   const initialMovement = (currentPage - 1) * take;
-  const pageMovements = movements.slice(
+  const pageMovements = filteredMovements.slice(
     initialMovement,
     initialMovement + take
   );
@@ -51,7 +58,7 @@ const MovementsList = () => {
           ))}
         </tbody>
       </Table>
-      <Pagination total={movements.length} />
+      <Pagination total={filteredMovements.length} />
     </>
   );
 };

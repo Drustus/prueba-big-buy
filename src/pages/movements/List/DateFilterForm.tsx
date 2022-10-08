@@ -6,23 +6,21 @@ import { DateFilterFormProps } from "./types";
 import { FilterContext } from "contexts/filter/FilterContext";
 
 const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
-  const {
-    onSelectedDateIni,
-    dateEnd,
-    dateIni,
-    onSelectedDateEnd,
-    rawIni,
-    rawEnd,
-    clearDateFilter
-  } = useContext(FilterContext);
+  const [selectedIni, setSelectedIni] = useState<string>();
+  const [selectedEnd, setSelectedEnd] = useState<string>();
+  const { onSelectedDateFilter, rawIni, rawEnd, clearDateFilter } =
+    useContext(FilterContext);
   const [error, showError] = useState<boolean>(false);
 
   const onSubmit = () => {
-    if (!dateEnd || !dateIni) {
-      closeFilter();
-    } else if (dateEnd < dateIni) {
+    if (!selectedIni || !selectedEnd) {
+      onClear();
+    } else if (new Date(selectedEnd) < new Date(selectedIni)) {
       showError(true);
     } else {
+      closeFilter();
+      showError(false);
+      onSelectedDateFilter({ ini: selectedIni, end: selectedEnd });
     }
   };
 
@@ -39,7 +37,7 @@ const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
           <Form.Control
             type="date"
             defaultValue={rawIni}
-            onChange={e => onSelectedDateIni(e.target.value)}
+            onChange={e => setSelectedIni(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="dateEnd">
@@ -48,7 +46,7 @@ const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
             defaultValue={rawEnd}
             isInvalid={!!error}
             type="date"
-            onChange={e => onSelectedDateEnd(e.target.value)}
+            onChange={e => setSelectedEnd(e.target.value)}
           />
           <Form.Control.Feedback type="invalid">
             "La fecha de fin no puede ser anterior a la de inicio"

@@ -1,14 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import BPagination from "react-bootstrap/Pagination";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "./styles.scss";
 import Props, { OnSelectedPageProps, OnSelectedTakeProps } from "./types";
 import { PaginationContext } from "contexts/pagination/PaginationContext";
+import { FilterContext } from "contexts/filter/FilterContext";
 
 const Pagination = ({ total }: Props) => {
   const { currentPage, setCurrentPage, setSkip, setTake, skip, take } =
     useContext(PaginationContext);
+
+  const { textFilter, dateEnd, dateIni } = useContext(FilterContext);
 
   const totalPages = Math.ceil(total / take);
   const initialPage = skip ? skip + 1 : 1;
@@ -87,6 +90,10 @@ const Pagination = ({ total }: Props) => {
       }
     }
   };
+
+  useEffect(() => {
+    onSelectedFirst();
+  }, [dateEnd, dateIni, textFilter]);
 
   return (
     <div className="paginator-container">

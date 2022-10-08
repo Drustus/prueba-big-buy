@@ -106,9 +106,9 @@ const Pagination = ({ total }: Props) => {
           <Dropdown.Item onClick={() => onSelectedTake(10)}>10</Dropdown.Item>
           <Dropdown.Item onClick={() => onSelectedTake(20)}>20</Dropdown.Item>
         </DropdownButton>
-        <div className="pagination-message">{`Mostrando filas fuck a ${
-          initialPage + take - 1
-        } de ${total}`}</div>
+        <div className="pagination-message">{`Mostrando filas ${
+          (currentPage - 1) * take + 1
+        } a ${(currentPage - 1) * take + take} de ${total}`}</div>
       </div>
     </div>
   );

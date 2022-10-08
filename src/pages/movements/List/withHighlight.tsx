@@ -1,19 +1,22 @@
 import { WithHighlightProps } from "./types";
 
 const withHighlight: WithHighlightProps = (text, filter) => {
-  if (!filter || !text.includes(filter)) {
+  if (!filter) {
     return text;
-  } else {
-    const index = text.indexOf(filter);
-    return (
-      <>
-        <div>
-          {text.slice(0, index)}
-          <mark className="mark-selection">{filter}</mark>
-          {text.slice(index + filter.length, text.length)}
-        </div>
-      </>
-    );
   }
+  const parts = text.split(new RegExp(`(${filter})`, "gi"));
+  return (
+    <div>
+      {parts.map((part, i) =>
+        part.toLowerCase() === filter.toLowerCase() ? (
+          <mark key={i} className="mark-selection">
+            {part}
+          </mark>
+        ) : (
+          part
+        )
+      )}
+    </div>
+  );
 };
 export default withHighlight;

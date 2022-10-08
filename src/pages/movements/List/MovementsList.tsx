@@ -46,7 +46,7 @@ const MovementsList = () => {
       const containsTime = time.includes(parsedTextFilter);
 
       return (
-        concept.includes(parsedTextFilter) ||
+        concept.toLowerCase().includes(parsedTextFilter.toLowerCase()) ||
         containsAmount ||
         containsLastBalance ||
         containsNextBalance ||

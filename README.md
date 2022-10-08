@@ -14,7 +14,7 @@ Comandos usuales para trabajar:
 
 - `yarn` para instalar
 - `yarn start` para arrancar la aplicación
-- `yarn cypress open` para inicializar cypress y lanzar sus tests
+- `yarn cypress open` para inicializar cypress. Seleccionar `E2E Testing` -> Running Chrome -> seleccionar wallet.cy.ts
 
 # Dificultades
 

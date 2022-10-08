@@ -7,7 +7,8 @@ import useModal from "hooks/modal/useModal";
 import NewMovementForm from "./NewMovementForm";
 import { useContext, useRef, useState } from "react";
 import "./styles.scss";
-import { WalletContext } from "contexts/WalletContext";
+import { WalletContext } from "contexts/wallet/WalletContext";
+import PaginationProvider from "contexts/pagination/PaginationContext";
 
 const Movements = () => {
   const { onAddMovement } = useContext(WalletContext);
@@ -51,7 +52,9 @@ const Movements = () => {
             </Button>
           </div>
         </Card.Title>
-        <MovementsList />
+        <PaginationProvider>
+          <MovementsList />
+        </PaginationProvider>
       </Card>
       {withModal(
         <NewMovementForm

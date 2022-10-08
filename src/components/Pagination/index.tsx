@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useContext } from "react";
 import BPagination from "react-bootstrap/Pagination";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "./styles.scss";
 import Props from "./types";
+import { PaginationContext } from "contexts/pagination/PaginationContext";
 
-const Pagination = ({ total, onPageChange }: Props) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [take, setTake] = useState<number>(5);
-  const [skip, setSkip] = useState<number>(0);
+const Pagination = ({ total }: Props) => {
+  const { currentPage, setCurrentPage, setSkip, setTake, skip, take } =
+    useContext(PaginationContext);
 
   const totalPages = Math.ceil(total / take);
   const initialPage = skip ? skip + 1 : 1;
@@ -36,7 +36,6 @@ const Pagination = ({ total, onPageChange }: Props) => {
   };
 
   const onSelectedPage: (page: number) => void = page => {
-    onPageChange(page);
     setCurrentPage(page);
   };
 
@@ -46,8 +45,10 @@ const Pagination = ({ total, onPageChange }: Props) => {
   };
 
   const onSelectedLast = () => {
-    setSkip(totalPages - take);
     setCurrentPage(totalPages);
+    if (totalPages - take > 0) {
+      setSkip(totalPages - take);
+    }
   };
 
   const onSkipForward = () => {
@@ -67,18 +68,20 @@ const Pagination = ({ total, onPageChange }: Props) => {
   const onPrev = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage => currentPage - 1);
-    }
-    if (currentPage - 1 < initialPage) {
-      setSkip(currentSkip => currentSkip - 5);
+
+      if (currentPage - 1 < initialPage) {
+        setSkip(currentSkip => currentSkip - 5);
+      }
     }
   };
 
   const onNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage => currentPage + 1);
-    }
-    if (currentPage + 1 === initialPage + pagesToShow) {
-      setSkip(currentSkip => currentSkip + 5);
+
+      if (currentPage + 1 === initialPage + pagesToShow) {
+        setSkip(currentSkip => currentSkip + 5);
+      }
     }
   };
 
@@ -103,7 +106,9 @@ const Pagination = ({ total, onPageChange }: Props) => {
           <Dropdown.Item onClick={() => onSelectedTake(10)}>10</Dropdown.Item>
           <Dropdown.Item onClick={() => onSelectedTake(20)}>20</Dropdown.Item>
         </DropdownButton>
-        <div className="pagination-message">Mostrando filas 1 a 5 de 50</div>
+        <div className="pagination-message">{`Mostrando filas fuck a ${
+          initialPage + take - 1
+        } de ${total}`}</div>
       </div>
     </div>
   );

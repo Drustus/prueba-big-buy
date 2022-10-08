@@ -1,4 +1,4 @@
-import WalletProvider from "contexts/WalletContext";
+import WalletProvider from "contexts/wallet/WalletContext";
 import "./App.scss";
 import Movements from "./movements";
 

@@ -1,4 +1,4 @@
-import { WalletContext } from "contexts/WalletContext";
+import { WalletContext } from "contexts/wallet/WalletContext";
 import { forwardRef, useContext, useImperativeHandle, useState } from "react";
 import Form from "react-bootstrap/Form";
 import numberWithPoint from "utils/numberWithPoint";

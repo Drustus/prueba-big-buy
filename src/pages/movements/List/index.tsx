@@ -1,18 +1,28 @@
 import Pagination from "components/Pagination";
 import Table from "components/Table";
-import useWallet from "hooks/wallet/useWallet";
+import { PaginationContext } from "contexts/pagination/PaginationContext";
+import { WalletContext } from "contexts/wallet/WalletContext";
+import { useContext } from "react";
 import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
 import Header from "./Header";
 
 const MovementsList = () => {
-  const { movements } = useWallet();
+  const { movements } = useContext(WalletContext);
+  const { currentPage, take } = useContext(PaginationContext);
+  console.log(movements);
+  const initialMovement = (currentPage - 1) * take;
+  const pageMovements = movements.slice(
+    initialMovement,
+    initialMovement + take
+  );
+
   return (
     <>
       <Table>
         <Header />
         <tbody>
-          {movements.map(movement => (
+          {pageMovements.map(movement => (
             <tr key={movement.id}>
               <Cell>{movement.id}</Cell>
               <Cell>
@@ -40,7 +50,7 @@ const MovementsList = () => {
           ))}
         </tbody>
       </Table>
-      <Pagination total={movements.length} onPageChange={() => {}} />
+      <Pagination total={movements.length} />
     </>
   );
 };

@@ -11,6 +11,7 @@ import { WalletContext } from "contexts/wallet/WalletContext";
 import PaginationProvider from "contexts/pagination/PaginationContext";
 import Searcher from "./Searcher";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OnSubmitHanlderProps } from "./types";
 
 const Movements = () => {
   const { onAddMovement, balance } = useContext(WalletContext);
@@ -33,7 +34,7 @@ const Movements = () => {
     openModal();
   };
 
-  const onSubmitHanlder: (value: any) => void = value => {
+  const onSubmitHanlder: OnSubmitHanlderProps = value => {
     onAddMovement({
       amount: value,
       concept: operation

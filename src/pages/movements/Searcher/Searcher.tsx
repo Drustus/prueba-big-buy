@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { FilterContext } from "contexts/filter/FilterContext";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import Button from "components/Button";
+import { OnSelectedColumnProps } from "./types";
 
 const columns = [
   { id: "id", label: "Nº Movimiento" },
@@ -28,7 +29,7 @@ const Searcher = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState<Array<string>>([]);
 
-  const onSelectedColumn: (id: string) => void = id => {
+  const onSelectedColumn: OnSelectedColumnProps = id => {
     const index = selectedColumns.indexOf(id);
     if (index >= 0) {
       setSelectedColumns(current => {

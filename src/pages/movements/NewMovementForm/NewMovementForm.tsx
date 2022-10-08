@@ -2,7 +2,7 @@ import { WalletContext } from "contexts/wallet/WalletContext";
 import { forwardRef, useContext, useImperativeHandle, useState } from "react";
 import Form from "react-bootstrap/Form";
 import numberWithPoint from "utils/numberWithPoint";
-import Props from "./types";
+import Props, { OnSubmitHandlerType } from "./types";
 import "./styles.scss";
 
 const PREFIX = "En tu cuenta quedarán:";
@@ -24,11 +24,11 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
     const isLowerThanZero = quantity <= 0;
     const totalBalanceLowerThanZero = type === 1 && balance - quantity < 0;
 
-    const onChange: (event: any) => void = event => {
+    const onChange: OnChangeType = event => {
       setValue(event.target.value);
     };
 
-    const onSubmitHandler: (event?: any) => void = event => {
+    const onSubmitHandler: OnSubmitHandlerType = event => {
       event?.preventDefault();
 
       if (isNaN) {

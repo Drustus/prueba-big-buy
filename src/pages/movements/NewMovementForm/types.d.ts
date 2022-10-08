@@ -5,4 +5,7 @@ type Props = {
   type: MovementType | null;
 };
 
+export type OnChangeType = (event: any) => void;
+export type OnSubmitHandlerType = (event?: any) => void;
+
 export default Props;

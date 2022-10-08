@@ -3,7 +3,7 @@ import BPagination from "react-bootstrap/Pagination";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "./styles.scss";
-import Props from "./types";
+import Props, { OnSelectedPageProps, OnSelectedTakeProps } from "./types";
 import { PaginationContext } from "contexts/pagination/PaginationContext";
 
 const Pagination = ({ total }: Props) => {
@@ -38,7 +38,7 @@ const Pagination = ({ total }: Props) => {
     return Pages;
   };
 
-  const onSelectedPage: (page: number) => void = page => {
+  const onSelectedPage: OnSelectedPageProps = page => {
     setCurrentPage(page);
   };
 
@@ -62,7 +62,7 @@ const Pagination = ({ total }: Props) => {
     setSkip(currentSkip => currentSkip - 5);
   };
 
-  const onSelectedTake: (take: number) => void = take => {
+  const onSelectedTake: OnSelectedTakeProps = take => {
     setTake(take);
     setCurrentPage(1);
     setSkip(0);

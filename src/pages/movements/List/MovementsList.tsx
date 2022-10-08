@@ -9,6 +9,8 @@ import { dateToString, timeToString } from "utils/dateFormatter";
 import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
 import Header from "./Header";
+import { GetCellContentProps } from "./types";
+import withHighlight from "./withHighlight";
 
 const MovementsList = () => {
   const { movements } = useContext(WalletContext);
@@ -60,6 +62,10 @@ const MovementsList = () => {
     initialMovement + take
   );
 
+  const getCellContent: GetCellContentProps = text => {
+    return withHighlight(text, textFilter);
+  };
+
   return (
     <>
       <Table>
@@ -71,22 +77,32 @@ const MovementsList = () => {
               {columns.showDate && (
                 <Cell>
                   <div className="cell-date">
-                    <div>{dateToString(movement.date)}</div>
-                    <div>{timeToString(movement.date)}</div>
+                    <div>{getCellContent(dateToString(movement.date))}</div>
+                    <div>{getCellContent(timeToString(movement.date))}</div>
                   </div>
                 </Cell>
               )}
               {columns.showConcept && (
-                <Cell>{movement.concept === 0 ? "Ingreso" : "Retirada"}</Cell>
+                <Cell>
+                  {movement.concept === 0
+                    ? getCellContent("Ingreso")
+                    : getCellContent("Retirada")}
+                </Cell>
               )}
               {columns.showAmount && (
-                <Cell>{`${numberWithPoint(movement.amount)} €`}</Cell>
+                <Cell>
+                  {getCellContent(`${numberWithPoint(movement.amount)} €`)}
+                </Cell>
               )}
               {columns.showLastBalance && (
-                <Cell>{`${numberWithPoint(movement.lastBalance)} €`}</Cell>
+                <Cell>
+                  {getCellContent(`${numberWithPoint(movement.lastBalance)} €`)}
+                </Cell>
               )}
               {columns.showNextBalance && (
-                <Cell>{`${numberWithPoint(movement.nextBalance)} €`}</Cell>
+                <Cell>
+                  {getCellContent(`${numberWithPoint(movement.nextBalance)} €`)}
+                </Cell>
               )}
             </tr>
           ))}

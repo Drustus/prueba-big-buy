@@ -82,7 +82,11 @@ const Searcher = () => {
           <BButton variant="secondary" onClick={() => setShowFilter(false)}>
             Cerrar
           </BButton>
-          <BButton variant="light" onClick={onClear}>
+          <BButton
+            variant="warning"
+            onClick={onClear}
+            disabled={filterColumns.length === 0}
+          >
             Limpiar
           </BButton>
         </div>

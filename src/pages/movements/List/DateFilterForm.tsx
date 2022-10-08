@@ -14,6 +14,7 @@ const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
     useContext(FilterContext);
 
   const onSubmit = () => {
+    console.log(selectedIni);
     if (!selectedIni || !selectedEnd) {
       onClear();
     } else if (new Date(selectedEnd) < new Date(selectedIni)) {
@@ -59,7 +60,11 @@ const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
         <BButton variant="secondary" onClick={closeFilter}>
           Cerrar
         </BButton>
-        <BButton variant="light" onClick={onClear}>
+        <BButton
+          variant="warning"
+          onClick={onClear}
+          disabled={!rawIni && !rawEnd}
+        >
           Limpiar
         </BButton>
       </div>

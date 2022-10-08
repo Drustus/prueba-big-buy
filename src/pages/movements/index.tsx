@@ -32,7 +32,7 @@ const Movements = () => {
     openModal();
   };
 
-  const onSubmitTest: (value: any) => void = value => {
+  const onSubmitHanlder: (value: any) => void = value => {
     onAddMovement({
       amount: value,
       concept: operation
@@ -61,7 +61,7 @@ const Movements = () => {
       </Card>
       {withModal(
         <NewMovementForm
-          onSubmit={onSubmitTest}
+          onSubmit={onSubmitHanlder}
           type={operation}
           ref={formRef}
         />,

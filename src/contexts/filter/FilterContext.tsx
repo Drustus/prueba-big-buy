@@ -58,7 +58,6 @@ const FilterProvider = ({ children }: Props) => {
   };
 
   const clearColumnFilter = () => {
-    console.log("clear");
     setFilterColumns([]);
   };
 

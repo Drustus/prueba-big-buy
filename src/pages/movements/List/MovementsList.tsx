@@ -5,6 +5,7 @@ import { PaginationContext } from "contexts/pagination/PaginationContext";
 import { WalletContext } from "contexts/wallet/WalletContext";
 import useColumnFilter from "hooks/columnFilter/useColumnFilter";
 import { useContext } from "react";
+import { dateToString, timeToString } from "utils/dateFormatter";
 import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
 import Header from "./Header";
@@ -33,15 +34,22 @@ const MovementsList = () => {
       const amount = numberWithPoint(movement.amount) + "€";
       const lastBalance = numberWithPoint(movement.lastBalance) + "€";
       const nextBalance = numberWithPoint(movement.nextBalance) + "€";
+      const date = dateToString(movement.date);
+      const time = timeToString(movement.date);
+
       const containsAmount = amount.includes(parsedTextFilter);
       const containsLastBalance = lastBalance.includes(parsedTextFilter);
       const containsNextBalance = nextBalance.includes(parsedTextFilter);
+      const containsDate = date.includes(parsedTextFilter);
+      const containsTime = time.includes(parsedTextFilter);
 
       return (
         concept.includes(parsedTextFilter) ||
         containsAmount ||
         containsLastBalance ||
-        containsNextBalance
+        containsNextBalance ||
+        containsDate ||
+        containsTime
       );
     });
   }
@@ -63,19 +71,8 @@ const MovementsList = () => {
               {columns.showDate && (
                 <Cell>
                   <div className="cell-date">
-                    <div>
-                      {movement.date.toLocaleDateString("es-es", {
-                        month: "2-digit",
-                        day: "2-digit",
-                        year: "2-digit"
-                      })}
-                    </div>
-                    <div>
-                      {movement.date.toLocaleTimeString("es-es", {
-                        hour: "2-digit",
-                        minute: "2-digit"
-                      })}
-                    </div>
+                    <div>{dateToString(movement.date)}</div>
+                    <div>{timeToString(movement.date)}</div>
                   </div>
                 </Cell>
               )}

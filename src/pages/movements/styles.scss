@@ -16,9 +16,15 @@
   align-items: center;
   padding: 0px;
   gap: 25px;
-  flex: none;
   order: 1;
   flex-grow: 0;
+  flex-wrap: wrap;
+}
+
+.right-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
 }
 
 .card-body > .title {

@@ -4,11 +4,14 @@
   align-items: flex-start;
   padding-bottom: 25px;
   gap: 7px;
+  flex-wrap: wrap;
 }
 
 .searcher > form {
   width: 100%;
-  flex: 0.5;
+  flex: 0.8;
+  max-width: 350px;
+  min-width: 200px;
 }
 
 .columnas-button {

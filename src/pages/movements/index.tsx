@@ -47,10 +47,12 @@ const Movements = () => {
           <Title />
           <div className="right-button">
             <Quantity />
-            <Button onClick={onExtract}>Retirar fondos</Button>
-            <Button secondary onClick={onAdd}>
-              Ingresar fondos
-            </Button>
+            <div className="right-buttons">
+              <Button onClick={onExtract}>Retirar fondos</Button>
+              <Button secondary onClick={onAdd}>
+                Ingresar fondos
+              </Button>
+            </div>
           </div>
         </Card.Title>
         <Searcher />

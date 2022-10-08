@@ -18,9 +18,12 @@ const MovementsList = () => {
   let filteredMovements = movements;
 
   if (dateIni && dateEnd) {
-    filteredMovements = filteredMovements.filter(
-      movement => movement.date >= dateIni && movement.date <= dateEnd
-    );
+    filteredMovements = filteredMovements.filter(movement => {
+      movement.date.setUTCHours(0, 0, 0, 0);
+      dateIni.setUTCHours(0, 0, 0, 0);
+      dateEnd.setUTCHours(0, 0, 0, 0);
+      return movement.date >= dateIni && movement.date <= dateEnd;
+    });
   }
 
   if (textFilter) {

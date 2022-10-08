@@ -5,9 +5,7 @@ import numberWithPoint from "utils/numberWithPoint";
 import Props from "./types";
 import "./styles.scss";
 
-const prefix = "En tu cuenta quedarán:";
-const round: (num: number) => number = num =>
-  Math.round((num + Number.EPSILON) * 100) / 100;
+const PREFIX = "En tu cuenta quedarán:";
 
 const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
   (props, ref) => {
@@ -24,8 +22,7 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
     const isNaN = !/^\d+([,.]\d{1,2})?$/im.test(number);
     const quantity = Number.parseFloat(number);
     const isLowerThanZero = quantity <= 0;
-    const totalBalanceLowerThanZero =
-      type === 1 && round(balance) - quantity < 0;
+    const totalBalanceLowerThanZero = type === 1 && balance - quantity < 0;
 
     const onChange: (event: any) => void = event => {
       setValue(event.target.value);
@@ -58,13 +55,13 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
       } else if (type === 0) {
         return (
           <div className="result-message">
-            {`${prefix}: ${numberWithPoint(balance + quantity)} €`}
+            {`${PREFIX}: ${numberWithPoint(balance + quantity)} €`}
           </div>
         );
       } else {
         return (
           <div className="result-message">
-            {`${prefix} ${numberWithPoint(balance - quantity)} €`}
+            {`${PREFIX} ${numberWithPoint(balance - quantity)} €`}
           </div>
         );
       }

@@ -1,15 +1,16 @@
 import { Movement, RawWaller, Wallet } from "global";
+import round from "./round";
 
 const orderByDate: (a: Movement, b: Movement) => number = (a, b) =>
   new Date(b.date).getTime() - new Date(a.date).getTime();
 
 const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
   const parsedWallet: Wallet = {
-    balance: wallet.balance / 100,
+    balance: round(wallet.balance / 100),
     movements: []
   };
 
-  const getLastBalance: (index: number) => number = index => {
+  const getLastBalance: () => number = () => {
     return parsedWallet.movements[0]?.nextBalance || parsedWallet.balance;
   };
 
@@ -18,8 +19,8 @@ const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
   for (let index = orderedMovements.length - 1; index >= 0; index--) {
     const movement = orderedMovements[index];
 
-    const lastBalance = getLastBalance(index);
-    const amount = movement.amount / 100;
+    const lastBalance = getLastBalance();
+    const amount = round(movement.amount / 100);
 
     let nextBalance;
     if (movement.concept === 0) {
@@ -37,7 +38,7 @@ const parseWallet: (wallet: RawWaller) => Wallet = wallet => {
     });
   }
 
-  parsedWallet.balance = parsedWallet.movements[0].nextBalance;
+  parsedWallet.balance = round(parsedWallet.movements[0].nextBalance);
 
   return parsedWallet;
 };

@@ -1,5 +1,6 @@
 import Pagination from "components/Pagination";
 import Table from "components/Table";
+import { FilterContext } from "contexts/filter/FilterContext";
 import { PaginationContext } from "contexts/pagination/PaginationContext";
 import { WalletContext } from "contexts/wallet/WalletContext";
 import { useContext } from "react";

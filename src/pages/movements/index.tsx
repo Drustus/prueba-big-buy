@@ -9,6 +9,7 @@ import { useContext, useRef, useState } from "react";
 import "./styles.scss";
 import { WalletContext } from "contexts/wallet/WalletContext";
 import PaginationProvider from "contexts/pagination/PaginationContext";
+import FilterProvider from "contexts/filter/FilterContext";
 
 const Movements = () => {
   const { onAddMovement } = useContext(WalletContext);
@@ -53,7 +54,9 @@ const Movements = () => {
           </div>
         </Card.Title>
         <PaginationProvider>
-          <MovementsList />
+          <FilterProvider>
+            <MovementsList />
+          </FilterProvider>
         </PaginationProvider>
       </Card>
       {withModal(

@@ -10,9 +10,10 @@ import "./styles.scss";
 import { WalletContext } from "contexts/wallet/WalletContext";
 import PaginationProvider from "contexts/pagination/PaginationContext";
 import Searcher from "./Searcher";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Movements = () => {
-  const { onAddMovement } = useContext(WalletContext);
+  const { onAddMovement, balance } = useContext(WalletContext);
   const formRef = useRef<{ submit: () => void }>(null);
   const [operation, setOperation] = useState<number>(-1);
 
@@ -48,7 +49,16 @@ const Movements = () => {
           <div className="right-button">
             <Quantity />
             <div className="right-buttons">
-              <Button onClick={onExtract}>Retirar fondos</Button>
+              <OverlayTrigger
+                show={balance !== 0 ? false : undefined}
+                overlay={<Tooltip>¡No queda dinero en el monedero!</Tooltip>}
+              >
+                <span className="d-inline-block">
+                  <Button onClick={onExtract} disabled={balance === 0}>
+                    Retirar fondos
+                  </Button>
+                </span>
+              </OverlayTrigger>
               <Button secondary onClick={onAdd}>
                 Ingresar fondos
               </Button>

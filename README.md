@@ -2,7 +2,7 @@
 
 Esta prueba consiste en añadir movimientos y realizar la operación correspondiente. En primer lugar hay que tener en cuenta que seguramente los datos estarán en su formato de moneda más pequeña, ya que por internacionalización no todas las monedas funcionan con la misma cantidad de decimales. Lo he dividido entre 100 para nuestro formato.
 
-En el desarrollo he intentado aplicar patrones de React (HOC, render props, compound, etc) para mostrar dichas características aunque a veces quedara de manera forzada. La arquitectura del proyecto es simple y no he simulado un repositorio para obtener los datos, cargándolos directamente del JSON.
+En el desarrollo he intentado aplicar patrones de React (HOC, render props, compound, etc) y algunos hooks predefinidos (useImperativeHandler, useRef) para mostrar dichas características aunque a veces quedara de manera forzada. La arquitectura del proyecto es simple y no he simulado un repositorio para obtener los datos, cargándolos directamente del JSON.
 
 Además de un test de cada tipo he añadido tests E2E con cypress.
 
@@ -28,4 +28,4 @@ Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado
 
 Como parte de mejora se ha cambiado el botón de filtrar para que sea una búsqueda dinámica, aportando rapidez al usuario y evitando clics. En el formulario para realizar una operación se ha añadido un texto que indica el resultado que va a tener la operación según la cantidad.
 
-Quedarían multitud de mejoras que se podrían añadir: mejor validación de formulario, feedback al usuario cuando realice una operación, más tipos de filtrados en las columnas (filtrar movimiento con operadores, por ejemplo), mejorar el diseño, i18n de textos y monedas.
+Quedarían multitud de mejoras que se podrían añadir: mejor validación de formulario, feedback al usuario cuando realice una operación, más tipos de filtrados en las columnas (filtrar importe con operadores, por ejemplo), mejorar el diseño, i18n de textos y monedas, lazyload de componentes, enrutado.

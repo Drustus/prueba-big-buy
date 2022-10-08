@@ -40,7 +40,7 @@ const MovementsList = () => {
           ))}
         </tbody>
       </Table>
-      <Pagination total={movements.length} />
+      <Pagination total={movements.length} onPageChange={() => {}} />
     </>
   );
 };

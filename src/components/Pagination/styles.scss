@@ -4,9 +4,21 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
-  gap: 447px;
   flex: none;
   order: 3;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.take {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination-message {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
 }

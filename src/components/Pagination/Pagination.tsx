@@ -12,10 +12,13 @@ const Pagination = ({ total }: Props) => {
 
   const totalPages = Math.ceil(total / take);
   const initialPage = skip ? skip + 1 : 1;
-  const offset = skip + take;
-  const containsMorePages = offset < totalPages;
-  const pagesToShow =
-    containsMorePages || totalPages - offset > 5 ? 5 : totalPages;
+  let pagesToShow = 5;
+
+  if (initialPage + 4 < totalPages) {
+    pagesToShow = initialPage + 4;
+  } else {
+    pagesToShow = totalPages;
+  }
 
   const getPages = () => {
     const Pages = [];
@@ -93,7 +96,7 @@ const Pagination = ({ total }: Props) => {
           <BPagination.Prev onClick={onPrev} />
           {pagesToShow > 5 && <BPagination.Ellipsis onClick={onSkipBackward} />}
           {getPages()}
-          {containsMorePages && (
+          {pagesToShow < totalPages && (
             <BPagination.Ellipsis onClick={onSkipForward} />
           )}
           <BPagination.Next onClick={onNext} />
@@ -108,7 +111,10 @@ const Pagination = ({ total }: Props) => {
         </DropdownButton>
         <div className="pagination-message">{`Mostrando filas ${
           (currentPage - 1) * take + 1
-        } a ${(currentPage - 1) * take + take} de ${total}`}</div>
+        } a ${Math.min(
+          (currentPage - 1) * take + take,
+          total
+        )} de ${total}`}</div>
       </div>
     </div>
   );

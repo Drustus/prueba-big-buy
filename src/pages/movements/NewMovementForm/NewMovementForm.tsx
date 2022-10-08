@@ -3,8 +3,11 @@ import { forwardRef, useContext, useImperativeHandle, useState } from "react";
 import Form from "react-bootstrap/Form";
 import numberWithPoint from "utils/numberWithPoint";
 import Props from "./types";
+import "./styles.scss";
 
 const prefix = "En tu cuenta quedarán:";
+const round: (num: number) => number = num =>
+  Math.round((num + Number.EPSILON) * 100) / 100;
 
 const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
   (props, ref) => {
@@ -21,7 +24,8 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
     const isNaN = !/^\d+([,.]\d{1,2})?$/im.test(number);
     const quantity = Number.parseFloat(number);
     const isLowerThanZero = quantity <= 0;
-    const totalBalanceLowerThanZero = type === 1 && balance - quantity < 0;
+    const totalBalanceLowerThanZero =
+      type === 1 && round(balance) - quantity < 0;
 
     const onChange: (event: any) => void = event => {
       setValue(event.target.value);
@@ -52,9 +56,17 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
       if (isNaN || isLowerThanZero || totalBalanceLowerThanZero) {
         return null;
       } else if (type === 0) {
-        return `${prefix}: ${numberWithPoint(balance + quantity)} €`;
+        return (
+          <div className="result-message">
+            {`${prefix}: ${numberWithPoint(balance + quantity)} €`}
+          </div>
+        );
       } else {
-        return `${prefix} ${numberWithPoint(balance - quantity)} €`;
+        return (
+          <div className="result-message">
+            {`${prefix} ${numberWithPoint(balance - quantity)} €`}
+          </div>
+        );
       }
     };
 
@@ -65,6 +77,7 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
           <Form.Control
             type="text"
             onChange={onChange}
+            onFocus={() => setError(null)}
             value={value}
             isInvalid={!!error}
             placeholder={

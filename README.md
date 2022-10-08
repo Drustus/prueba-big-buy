@@ -28,4 +28,6 @@ Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado
 
 Como parte de mejora se ha cambiado el botón de filtrar para que sea una búsqueda dinámica, aportando rapidez al usuario y evitando clics. En el formulario para realizar una operación se ha añadido un texto que indica el resultado que va a tener la operación según la cantidad.
 
+También se bloquea el botón para extraer fondos si no quedan y se le muestra un aviso al usuario mediante un tooltip.
+
 Quedarían multitud de mejoras que se podrían añadir: mejor validación de formulario, feedback al usuario cuando realice una operación, más tipos de filtrados en las columnas (filtrar importe con operadores, por ejemplo), mejorar el diseño, i18n de textos y monedas, lazyload de componentes, enrutado.

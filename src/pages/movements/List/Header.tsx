@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <thead>
       <tr className="table__header">
-        {columns.showId && <Table.Header>Nº Pedido</Table.Header>}
+        {columns.showId && <Table.Header>Nº Movimiento</Table.Header>}
         {columns.showDate && (
           <Table.Header>
             <div className="header-icons">

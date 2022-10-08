@@ -9,7 +9,7 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import Button from "components/Button";
 
 const columns = [
-  { id: "id", label: "Nº Pedido" },
+  { id: "id", label: "Nº Movimiento" },
   { id: "date", label: "Fecha" },
   { id: "concept", label: "Concepto" },
   { id: "amount", label: "Importe" },
@@ -31,8 +31,11 @@ const Searcher = () => {
   const onSelectedColumn: (id: string) => void = id => {
     const index = selectedColumns.indexOf(id);
     if (index >= 0) {
-      const [id, ...rest] = selectedColumns;
-      setSelectedColumns(rest);
+      setSelectedColumns(current => {
+        const copy = [...current];
+        copy.splice(index, 1);
+        return copy;
+      });
     } else {
       setSelectedColumns(current => [...current, id]);
     }
@@ -64,6 +67,10 @@ const Searcher = () => {
                 id={col.id}
                 type="checkbox"
                 label={col.label}
+                disabled={
+                  selectedColumns.length === columns.length - 1 &&
+                  selectedColumns.indexOf(col.id) === -1
+                }
                 onChange={() => onSelectedColumn(col.id)}
                 checked={selectedColumns.indexOf(col.id) === -1}
               />
@@ -89,7 +96,7 @@ const Searcher = () => {
         <Form.Group controlId="filter">
           <Form.Control
             type="text"
-            placeholder="Search..."
+            placeholder="Buscar..."
             onChange={e => onFilterText(e.target.value)}
             value={textFilter}
           />

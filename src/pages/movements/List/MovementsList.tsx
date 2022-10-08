@@ -24,17 +24,18 @@ const MovementsList = () => {
   }
 
   if (textFilter) {
+    const parsedTextFilter = textFilter.replaceAll(" ", "");
     filteredMovements = filteredMovements.filter(movement => {
       const concept = movement.concept === 0 ? "Ingreso" : "Retirada";
-      const amount = numberWithPoint(movement.amount);
-      const lastBalance = numberWithPoint(movement.lastBalance);
-      const nextBalance = numberWithPoint(movement.nextBalance);
-      const containsAmount = amount.includes(textFilter);
-      const containsLastBalance = lastBalance.includes(textFilter);
-      const containsNextBalance = nextBalance.includes(textFilter);
+      const amount = numberWithPoint(movement.amount) + "€";
+      const lastBalance = numberWithPoint(movement.lastBalance) + "€";
+      const nextBalance = numberWithPoint(movement.nextBalance) + "€";
+      const containsAmount = amount.includes(parsedTextFilter);
+      const containsLastBalance = lastBalance.includes(parsedTextFilter);
+      const containsNextBalance = nextBalance.includes(parsedTextFilter);
 
       return (
-        concept.includes(textFilter) ||
+        concept.includes(parsedTextFilter) ||
         containsAmount ||
         containsLastBalance ||
         containsNextBalance

@@ -18,8 +18,8 @@ const NewMovementForm = forwardRef<{ submit: () => void }, Props>(
     const [error, setError] = useState<string | null>();
 
     const number = value.replaceAll(".", "").replace(",", ".");
+    const isNaN = !/^\d+([,.]\d{1,2})?$/im.test(number);
     const quantity = Number.parseFloat(number);
-    const isNaN = Number.isNaN(quantity);
     const isLowerThanZero = quantity <= 0;
     const totalBalanceLowerThanZero = type === 1 && balance - quantity < 0;
 

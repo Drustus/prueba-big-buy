@@ -9,7 +9,7 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import Button from "components/Button";
 import { OnSelectedColumnProps } from "./types";
 
-const columns = [
+const COLUMNS = [
   { id: "id", label: "Nº Movimiento" },
   { id: "date", label: "Fecha" },
   { id: "concept", label: "Concepto" },
@@ -62,14 +62,14 @@ const Searcher = () => {
       <Popover.Body>
         <Form onSubmit={e => e.preventDefault()}>
           <Form.Group controlId="id">
-            {columns.map(col => (
+            {COLUMNS.map(col => (
               <Form.Check
                 key={col.id}
                 id={col.id}
                 type="checkbox"
                 label={col.label}
                 disabled={
-                  selectedColumns.length === columns.length - 1 &&
+                  selectedColumns.length === COLUMNS.length - 1 &&
                   selectedColumns.indexOf(col.id) === -1
                 }
                 onChange={() => onSelectedColumn(col.id)}

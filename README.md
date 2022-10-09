@@ -47,6 +47,7 @@ Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado
 - i18n textos y monedas. Extraer los textos hardcoded.
 - lazy load de componentes
 - Mejoras de arquitectura:
+  - Extracción de constantes.
   - Mejorar el tipado de los objetos, aprovechar herencias.
   - Ordenar los imports según patrón.
   - Encapsular librería de terceros.

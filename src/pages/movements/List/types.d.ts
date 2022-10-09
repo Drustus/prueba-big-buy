@@ -1,3 +1,5 @@
+import { MovementWithStatus } from "global";
+
 type Props = {
   children: React.ReactNode;
 };
@@ -12,5 +14,16 @@ export type WithHighlightProps = (
 ) => React.ReactNode;
 
 export type GetCellContentProps = (text: string) => React.ReactNode;
+
+export type FilterMovementsProps = (
+  params: FilterMovementsParams
+) => MovementWithStatus[];
+
+type FilterMovementsParams = {
+  movements: MovementWithStatus[];
+  dateIni: Date | undefined;
+  dateEnd: Date | undefined;
+  textFilter: string | undefined;
+};
 
 export default Props;

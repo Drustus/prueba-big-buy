@@ -4,10 +4,11 @@ import { FilterContext } from "contexts/filter/FilterContext";
 import { PaginationContext } from "contexts/pagination/PaginationContext";
 import { WalletContext } from "contexts/wallet/WalletContext";
 import useColumnFilter from "hooks/columnFilter/useColumnFilter";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { dateToString, timeToString } from "utils/dateFormatter";
 import numberWithPoint from "utils/numberWithPoint";
 import Cell from "./Cell";
+import filterMovements from "./filterMovements";
 import Header from "./Header";
 import { GetCellContentProps } from "./types";
 import withHighlight from "./withHighlight";
@@ -18,43 +19,16 @@ const MovementsList = () => {
   const { dateIni, dateEnd, textFilter } = useContext(FilterContext);
   const columns = useColumnFilter();
 
-  let filteredMovements = movements;
-
-  if (dateIni && dateEnd) {
-    filteredMovements = filteredMovements.filter(movement => {
-      movement.date.setUTCHours(0, 0, 0, 0);
-      dateIni.setUTCHours(0, 0, 0, 0);
-      dateEnd.setUTCHours(0, 0, 0, 0);
-      return movement.date >= dateIni && movement.date <= dateEnd;
-    });
-  }
-
-  if (textFilter) {
-    const parsedTextFilter = textFilter.replaceAll(" ", "");
-    filteredMovements = filteredMovements.filter(movement => {
-      const concept = movement.concept === 0 ? "Ingreso" : "Retirada";
-      const amount = numberWithPoint(movement.amount) + "€";
-      const lastBalance = numberWithPoint(movement.lastBalance) + "€";
-      const nextBalance = numberWithPoint(movement.nextBalance) + "€";
-      const date = dateToString(movement.date);
-      const time = timeToString(movement.date);
-
-      const containsAmount = amount.includes(parsedTextFilter);
-      const containsLastBalance = lastBalance.includes(parsedTextFilter);
-      const containsNextBalance = nextBalance.includes(parsedTextFilter);
-      const containsDate = date.includes(parsedTextFilter);
-      const containsTime = time.includes(parsedTextFilter);
-
-      return (
-        concept.toLowerCase().includes(parsedTextFilter.toLowerCase()) ||
-        containsAmount ||
-        containsLastBalance ||
-        containsNextBalance ||
-        containsDate ||
-        containsTime
-      );
-    });
-  }
+  const filteredMovements = useMemo(
+    () =>
+      filterMovements({
+        movements,
+        dateIni,
+        dateEnd,
+        textFilter
+      }),
+    [movements, dateIni, dateEnd, textFilter]
+  );
 
   const initialMovement = (currentPage - 1) * take;
   const pageMovements = filteredMovements.slice(

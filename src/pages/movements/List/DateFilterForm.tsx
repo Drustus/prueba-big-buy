@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import BButton from "react-bootstrap/Button";
-import Button from "components/Button";
 import { DateFilterFormProps } from "./types";
 import { FilterContext } from "contexts/filter/FilterContext";
+import Button from "components/Button";
 
 const DateFilterForm = ({ closeFilter }: DateFilterFormProps) => {
   const [selectedIni, setSelectedIni] = useState<string>();

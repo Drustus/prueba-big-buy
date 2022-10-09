@@ -1,12 +1,13 @@
 import Table from "components/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { OverlayTrigger, Popover } from "react-bootstrap";
-import "./styles.scss";
-import DateFilterForm from "./DateFilterForm";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 import { useContext, useState } from "react";
 import { FilterContext } from "contexts/filter/FilterContext";
 import useColumnFilter from "hooks/columnFilter/useColumnFilter";
+import DateFilterForm from "./DateFilterForm";
+import "./styles.scss";
 
 const Header = () => {
   const [showFilter, setShowFilter] = useState<boolean>(false);

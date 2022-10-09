@@ -8,6 +8,17 @@ Además de un test de cada tipo de objeto (hook, componente, vista), he añadido
 
 La aplicación se encuentra desplegada en el siguiente enlace: https://big-buy-wallet.onrender.com/
 
+## Tecnologías / librerías utilizadas
+
+- Git
+- react-bootstrap
+- ESLint
+- Prettier
+- Cypress
+- FontAwesome
+- sonarqube
+- [Render](https://dashboard.render.com/)
+
 # Iniciar la prueba
 
 Para arrancar el proyecto se necesita node y npm o yarn instalado, pero seguro que no hay problema ;)

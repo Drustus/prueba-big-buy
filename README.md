@@ -6,6 +6,8 @@ En el desarrollo he intentado aplicar patrones de React (HOC, render props, comp
 
 Además de un test de cada tipo de objeto (hook, componente, vista), he añadido un par de tests simples E2E con cypress.
 
+La aplicación se encuentra desplegada en el siguiente enlace: https://big-buy-wallet.onrender.com/
+
 # Iniciar la prueba
 
 Para arrancar el proyecto se necesita node y npm o yarn instalado, pero seguro que no hay problema ;)
@@ -47,3 +49,4 @@ Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado
 - Mejoras de arquitectura:
   - Mejorar el tipado de los objetos, aprovechar herencias.
   - Ordenar los imports según patrón.
+  - Encapsular librería de terceros.

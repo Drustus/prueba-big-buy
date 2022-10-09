@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import WalletProvider from "contexts/wallet/WalletContext";
+import { act } from "react-dom/test-utils";
 import NewMovementForm from "./index";
 
 const mockOnSubmit = jest.fn();
@@ -13,9 +14,11 @@ describe("NewMovementForm", () => {
       </WalletProvider>
     );
 
-    const input = screen.getByLabelText("Cantidad");
-    userEvent.type(input, "500");
-    userEvent.keyboard("{enter}");
+    act(() => {
+      const input = screen.getByLabelText("Cantidad");
+      userEvent.type(input, "500");
+      userEvent.keyboard("{enter}");
+    });
 
     await waitFor(() => {
       expect(mockOnSubmit).toHaveBeenCalledWith(500);
@@ -29,9 +32,11 @@ describe("NewMovementForm", () => {
       </WalletProvider>
     );
 
-    const input = screen.getByLabelText("Cantidad");
-    userEvent.type(input, "50000000");
-    userEvent.keyboard("{enter}");
+    act(() => {
+      const input = screen.getByLabelText("Cantidad");
+      userEvent.type(input, "50000000");
+      userEvent.keyboard("{enter}");
+    });
 
     await waitFor(() => {
       expect(
@@ -50,9 +55,11 @@ describe("NewMovementForm", () => {
         </WalletProvider>
       );
 
-      const input = screen.getByLabelText("Cantidad");
-      userEvent.type(input, "test");
-      userEvent.keyboard("{enter}");
+      act(() => {
+        const input = screen.getByLabelText("Cantidad");
+        userEvent.type(input, "test");
+        userEvent.keyboard("{enter}");
+      });
 
       await waitFor(() => {
         expect(screen.getByText("Formato incorrecto")).toBeInTheDocument();
@@ -66,14 +73,14 @@ describe("NewMovementForm", () => {
         </WalletProvider>
       );
 
-      const input = screen.getByLabelText("Cantidad");
-      userEvent.type(input, "-100");
-      userEvent.keyboard("{enter}");
+      act(() => {
+        const input = screen.getByLabelText("Cantidad");
+        userEvent.type(input, "-100");
+        userEvent.keyboard("{enter}");
+      });
 
       await waitFor(() => {
-        expect(
-          screen.getByText("La cantidad debe ser mayor a 0")
-        ).toBeInTheDocument();
+        expect(screen.getByText("Formato incorrecto")).toBeInTheDocument();
       });
     });
   });

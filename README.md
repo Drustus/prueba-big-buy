@@ -22,7 +22,7 @@ Comandos usuales para trabajar:
 
 Una de las mayores dificultades ha sido adaptar el diseño para un formato móvil.
 
-También ha sido especialmente tedioso realizar el paginado, teniendo en cuenta el número de elementos por página, el desplazamiento de la ventana del propio paginado, etc.
+También ha sido especialmente tedioso realizar el paginado teniendo en cuenta el número de elementos por página y los filtros que modifican la cantidad de elementos.
 
 Otra dificultad era añadir el filtrado de rango de fechas al diseño. He obtado por poner un filtro en esa columna que te permite poner fechas y filtrar por el rango. En cuanto al filtrado por tipo de operación la he incluido en el input buscador. Sobre este input, he optado por quitar el botón de Filtrar, ya que he hecho un filtro dinámico en el que se va filtrando mientras escribes. Esta decisión podría tener problemas si la carga de datos es muy alta y habría que utilizar algún patrón como `useDefferedValue` para evitar el bloqueo de interfaz. Con esta decisión tampoco se podría filtrar por varios campos.
 

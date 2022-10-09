@@ -97,8 +97,8 @@ const Searcher = () => {
 
   return (
     <div className="searcher">
-      <Form onSubmit={e => e.preventDefault()}>
-        <Form.Group controlId="filter">
+      <Form className="searcher-form" onSubmit={e => e.preventDefault()}>
+        <Form.Group className="searcher-form__input-container">
           <Form.Control
             type="text"
             placeholder="Buscar..."

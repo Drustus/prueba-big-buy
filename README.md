@@ -6,7 +6,7 @@ En el desarrollo he intentado aplicar patrones de React (HOC, render props, comp
 
 Además de un test de cada tipo de objeto (hook, componente, vista), he añadido un par de tests simples E2E con cypress.
 
-La aplicación se encuentra desplegada en el siguiente enlace: https://big-buy-wallet.onrender.com/
+La aplicación se encuentra desplegada en el siguiente enlace: https://big-buy-wallet.onrender.com/ y se ha creado un proyecto con sonarqube al que se puede acceder en el siguiente enlace: https://sonarcloud.io/summary/new_code?id=Drustus_prueba-big-buy
 
 ## Tecnologías / librerías utilizadas
 
@@ -16,7 +16,7 @@ La aplicación se encuentra desplegada en el siguiente enlace: https://big-buy-w
 - Prettier
 - Cypress
 - FontAwesome
-- sonarqube
+- [sonarqube](https://sonarcloud.io/summary/new_code?id=Drustus_prueba-big-buy)
 - [Render](https://dashboard.render.com/)
 
 # Iniciar la prueba
